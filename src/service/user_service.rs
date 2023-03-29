@@ -2,38 +2,30 @@ use std::collections::LinkedList;
 
 use log::info;
 
-use crate::config::constants::DELETE_OK_STATUS;
 use crate::model::user::User;
+use crate::repository::*;
 
 pub fn get_users() -> LinkedList<User> {
-    info!("get_users - executed");
-    return LinkedList::new();
+    info!("user_service - get_users - executed");
+    return user_repository::get_users();
 }
 
 pub fn get_user(user_id: i32) -> User {
-    info!("get_user - executed for user id: {}", user_id);
-    return User {
-        id: Option::from(user_id),
-        firstname: String::from("First Name"),
-        lastname: String::from("Last Name"),
-    };
+    info!("user_service - get_user - executed for user id: {}", user_id);
+    return user_repository::get_user(user_id);
 }
 
 pub fn add_user(user: User) -> User {
-    info!("add_user - executed for user: {:?}", user);
-    return user;
+    info!("user_service - add_user - executed for user: {:?}", user);
+    return user_repository::add_user(user);
 }
 
 pub fn update_user(user_id: i32, user: User) -> User {
-    info!("update_user - executed for user id: {} - user: {:?}", user_id, user);
-    return User {
-        id: Option::from(user_id),
-        firstname: user.firstname,
-        lastname: String::from("Updated Last Name"),
-    };
+    info!("user_service - update_user - executed for user id: {} - user: {:?}", user_id, user);
+    return user_repository::update_user(user_id, user);
 }
 
 pub fn delete_user(user_id: i32) -> String {
-    info!("delete_user - executed for user id: {}", user_id);
-    return String::from(DELETE_OK_STATUS);
+    info!("user_service - delete_user - executed for user id: {}", user_id);
+    return user_repository::delete_user(user_id);
 }
