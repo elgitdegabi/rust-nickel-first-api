@@ -12,9 +12,10 @@ Cargo.lock
 #IntelliJ IDE files and folders
 /.idea
 *.iml
+*.env
 
 # docker environment files
-./docker/*.env
+/docker/*.env
 
 # external project files
 *.txt
