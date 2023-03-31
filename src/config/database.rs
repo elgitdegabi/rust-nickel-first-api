@@ -3,10 +3,12 @@ extern crate dotenv;
 use std::env;
 
 use diesel::mysql::MysqlConnection;
-use diesel::prelude::*;
+use diesel::r2d2::ConnectionManager;
 use dotenv::dotenv;
 
-pub fn connect() -> MysqlConnection {
+pub static mut DB_POOL: Option<diesel::r2d2::Pool<ConnectionManager<MysqlConnection>>> = None;
+
+pub fn create_db_pool() -> diesel::r2d2::Pool<ConnectionManager<MysqlConnection>> {
     dotenv().ok();
 
     let host = env::var("MYSQL_HOST").expect("MYSQL_HOST must be set");
@@ -23,5 +25,16 @@ pub fn connect() -> MysqlConnection {
     db_url.push_str("/");
     db_url.push_str(&db_name);
 
-    return MysqlConnection::establish(&db_url).expect(&format!("Error connecting to {}", db_url));
+    let connection_manager = ConnectionManager::<MysqlConnection>::new(db_url);
+
+    return diesel::r2d2::Pool::builder()
+        .test_on_check_out(true)
+        .build(connection_manager)
+        .expect("Error building pool or connecting to DB");
+}
+
+pub fn get_pool_connection() -> diesel::r2d2::PooledConnection<ConnectionManager<MysqlConnection>> {
+    unsafe {
+        return DB_POOL.as_ref().unwrap().get().unwrap();
+    }
 }
