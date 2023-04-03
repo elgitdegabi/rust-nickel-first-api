@@ -38,3 +38,47 @@ pub fn get_pool_connection() -> diesel::r2d2::PooledConnection<ConnectionManager
         return DB_POOL.as_ref().unwrap().get().unwrap();
     }
 }
+
+/**
+ * Unit test cases
+ */
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /**
+     * Scenario:
+     * Executes create_db_pool
+     * Expectation:
+     * A db_pool should be created
+     */
+    #[test]
+    fn when_create_db_pool_should_be_create_db_pool() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+
+    /**
+     * Scenario:
+     * Executes get_pool_connection before create the pool connection
+     * Expectation:
+     * A None value should be retrieved
+     */
+    #[test]
+    fn when_get_pool_connection_and_pool_is_not_created_should_retrieve_none() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+
+    /**
+     * Scenario:
+     * Executes get_pool_connection after create the pool connection
+     * Expectation:
+     * A pool connection should be retrieved
+     */
+    #[test]
+    fn when_get_pool_connection_should_retrieve_the_connection_pool() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+}
