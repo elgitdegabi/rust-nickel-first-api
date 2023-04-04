@@ -7,6 +7,8 @@ use config::constants::HOST;
 use config::database::*;
 use controller::controller::config_endpoints;
 use log::info;
+use dotenv::dotenv;
+use std::env;
 
 mod config;
 mod controller;
@@ -16,7 +18,10 @@ mod repository;
 mod schema;
 
 fn main() {
-    log4rs::init_file("logging_config.yaml", Default::default()).unwrap();
+    dotenv().ok();
+
+    let log_config_file = env::var("LOG4RS_CONFIG_FILE").unwrap_or("logging_config.yaml".to_string());
+    log4rs::init_file(log_config_file, Default::default()).unwrap();
 
     unsafe {
         info!("DB pool - starting...");

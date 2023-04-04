@@ -110,9 +110,20 @@ curl --request POST \
   * MYSQL_PASSWORD
   * MYSQL_ROOT_PASSWORD
   * MYSQL_DATABASE
-* execute: docker-compose -f ./docker/docker-compose-local.yaml up
+```
+ docker compose --env-file=./docker/local-environment.env -f ./docker/docker-compose-local.yaml up
+```
 ### image build
-* WIP
+* start your docker desktop agent
+* IMPORTANT: you should set / export DATABASE_URL environment variable
+```
+docker build -t first-api-sample .
+```
+### image run
+* start your docker desktop agent
+```
+docker run -p 6767:6767 --env-file ./docker/local-environment.env first-api-sample
+```
 
 ## Run locally from command line
 * required environment variables:
@@ -120,7 +131,9 @@ curl --request POST \
   * MYSQL_USER
   * MYSQL_PASSWORD
   * MYSQL_DATABASE
-* execute: cargo run --color=always --package first-api-sample --bin first-api-sample
+```
+cargo run --color=always --package first-api-sample --bin first-api-sample
+```
 
 ## How to...
 ### Get started
@@ -165,8 +178,14 @@ curl --request POST \
 * Diesel 2 - migration and changelog: https://github.com/diesel-rs/diesel/blob/5d78e38d21f8184dbbb73a0ecb714a204186c67d/guide_drafts/migration_guide.md
 * MYSQL does not support returning clause for insert / updates: https://diesel.rs/guides/all-about-inserts.html
 
-### Implement Unit Test cases
+### Unit tests
 * https://doc.rust-lang.org/book/ch11-01-writing-tests.html
+#### execute test suites
+* cargo test
+
+#### mocking dependencies
+* https://docs.rs/mockall/latest/mockall/
+* https://danielbunte.medium.com/a-guide-to-testing-and-mocking-in-rust-a73d022b4075
 
 #### test coverage
 * https://doc.rust-lang.org/rustc/instrument-coverage.html
@@ -175,3 +194,9 @@ curl --request POST \
 
 ### Integration tests (tests folder)
 * https://doc.rust-lang.org/book/ch11-03-test-organization.html
+
+#### execute test suites
+* cargo test --test integration_test
+* alternative: cargo test (full unit and integration tests execution)
+
+

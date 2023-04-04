@@ -54,3 +54,23 @@ pub fn config_endpoints(mut server: Nickel) -> Nickel {
         return user_id.unwrap().parse::<i64>().unwrap();
     }
 }
+
+/**
+ * Unit test cases
+ */
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /**
+     * Scenario:
+     * Executes config_endpoints with valid Nickel server
+     * Expectation:
+     * A set of endpoints should be created
+     */
+    #[test]
+    fn when_config_endpoints_with_nickel_server_should_add_endpoints() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+}

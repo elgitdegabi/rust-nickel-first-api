@@ -67,3 +67,71 @@ fn get_user_by_alias(user_alias_value: String) -> User {
 
     return result.unwrap();
 }
+
+/**
+ * Unit test cases
+ */
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /**
+     * Scenario:
+     * Executes get_users with valid parameters
+     * Expectation:
+     * A list of users should be retrieved
+     */
+    #[test]
+    fn when_get_users_with_valid_parameters_should_return_user_list() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+
+    /**
+     * Scenario:
+     * Executes get_user with valid parameters
+     * Expectation:
+     * An user should be retrieved
+     */
+    #[test]
+    fn when_get_user_with_valid_parameters_should_return_user() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+
+    /**
+     * Scenario:
+     * Executes add_user with valid parameters
+     * Expectation:
+     * An user should be created
+     */
+    #[test]
+    fn when_add_user_with_valid_parameters_should_create_user() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+
+    /**
+     * Scenario:
+     * Executes update_user with valid parameters
+     * Expectation:
+     * An user should be updated
+     */
+    #[test]
+    fn when_update_user_with_valid_parameters_should_update_user() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+
+    /**
+     * Scenario:
+     * Executes delete_user with valid parameters
+     * Expectation:
+     * An user should be deleted
+     */
+    #[test]
+    fn when_delete_user_with_valid_parameters_should_delete_user() {
+        // TODO to be implemented
+        assert_eq!(true, true);
+    }
+}

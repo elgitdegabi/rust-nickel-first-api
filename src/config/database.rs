@@ -53,7 +53,7 @@ mod tests {
      * A db_pool should be created
      */
     #[test]
-    fn when_create_db_pool_should_be_create_db_pool() {
+    fn when_create_db_pool_should_create_db_pool() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
