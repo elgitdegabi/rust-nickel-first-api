@@ -23,7 +23,9 @@ mod tests {
     #[test]
     fn when_create_health_struct_should_retrieve_struct_values() {
         let status_value = "some_value";
-        let health = Health { status: String::from(status_value)};
+        let health = Health {
+            status: String::from(status_value),
+        };
         assert_eq!(status_value, health.status);
     }
 }

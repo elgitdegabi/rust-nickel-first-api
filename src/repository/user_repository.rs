@@ -1,29 +1,31 @@
-use diesel::{QueryDsl, RunQueryDsl};
-use diesel::prelude::*;
-use log::info;
 use self::schema::user::dsl::*;
+use diesel::prelude::*;
+use diesel::{QueryDsl, RunQueryDsl};
+use log::info;
 
-use crate::config::database::get_pool_connection;
 use crate::config::constants::DELETE_OK_STATUS;
+use crate::config::database::get_pool_connection;
 use crate::model::user::User;
 use crate::model::user::UserUpsert;
 use crate::schema;
 
 pub fn get_users() -> Vec<User> {
-    let result = user
-        .get_results::<User>(&mut get_pool_connection());
+    let result = user.get_results::<User>(&mut get_pool_connection());
     info!("user_repository - get_users - executed");
 
-    return result.unwrap();
+    result.unwrap()
 }
 
 pub fn get_user(user_id_value: i64) -> User {
     let result = user
         .filter(user_id.eq(user_id_value))
         .get_result::<User>(&mut get_pool_connection());
-    info!("user_repository - get_user - executed for user id: {}", user_id_value);
+    info!(
+        "user_repository - get_user - executed for user id: {}",
+        user_id_value
+    );
 
-    return result.unwrap();
+    result.unwrap()
 }
 
 pub fn add_user(user_to_add: UserUpsert) -> User {
@@ -31,10 +33,13 @@ pub fn add_user(user_to_add: UserUpsert) -> User {
         .values(&user_to_add)
         .execute(&mut get_pool_connection())
         .expect("add_user execution fails");
-    info!("user_repository - add_user - executed for user: {:?}", user_to_add);
+    info!(
+        "user_repository - add_user - executed for user: {:?}",
+        user_to_add
+    );
 
     // mysql doesn't support RETURNING clause (https://diesel.rs/guides/all-about-inserts.html)
-    return get_user_by_alias(user_to_add.user_alias.unwrap());
+    get_user_by_alias(user_to_add.user_alias.unwrap())
 }
 
 pub fn update_user(user_id_value: i64, user_to_update: UserUpsert) -> User {
@@ -43,10 +48,13 @@ pub fn update_user(user_id_value: i64, user_to_update: UserUpsert) -> User {
         .set(&user_to_update)
         .execute(&mut get_pool_connection())
         .expect("update_user execution fails");
-    info!("user_repository - update_user - executed for user id: {} - user: {:?}", user_id_value, user_to_update);
+    info!(
+        "user_repository - update_user - executed for user id: {} - user: {:?}",
+        user_id_value, user_to_update
+    );
 
     // mysql doesn't support RETURNING clause (https://diesel.rs/guides/all-about-inserts.html)
-    return get_user(user_id_value);
+    get_user(user_id_value)
 }
 
 pub fn delete_user(user_id_value: i64) -> String {
@@ -54,9 +62,12 @@ pub fn delete_user(user_id_value: i64) -> String {
         .filter(user_id.eq(user_id_value))
         .execute(&mut get_pool_connection())
         .expect("delete_user execution fails");
-    info!("user_repository - delete_user - executed for user id: {}", user_id_value);
+    info!(
+        "user_repository - delete_user - executed for user id: {}",
+        user_id_value
+    );
 
-    return String::from(DELETE_OK_STATUS);
+    String::from(DELETE_OK_STATUS)
 }
 
 // based on assumption: alias is unique
@@ -65,7 +76,7 @@ fn get_user_by_alias(user_alias_value: String) -> User {
         .filter(user_alias.eq(user_alias_value))
         .get_result::<User>(&mut get_pool_connection());
 
-    return result.unwrap();
+    result.unwrap()
 }
 
 /**

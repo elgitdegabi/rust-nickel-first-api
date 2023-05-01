@@ -153,6 +153,14 @@ cargo run --color=always --package first-api-sample --bin first-api-sample
 ### Create modules (organize files)
 * https://betterprogramming.pub/explaining-rusts-modules-420d38eed6c5
 
+### Rust format and clippy
+Remember configure your IDE (or run manually) these cargo commands just to improve your code
+```
+cargo fmt
+```
+```
+cargo clippy
+```
 ### Config Diesel ORM for MySQL DB
 #### use MySQL 
 * https://docs.rs/mysql/latest/mysql/
@@ -160,7 +168,9 @@ cargo run --color=always --package first-api-sample --bin first-api-sample
 #### install Diesel ORM (for MySQL DB)
 * https://github.com/diesel-rs/diesel/issues/1608
 * https://downloads.mysql.com/archives/c-c/
-* setx MYSQLCLIENT_LIB_DIR="[YOUR SQL PATH]\mysql-connector-c-6.1.11-winx64\lib\vs14"
+* setx MYSQLCLIENT_LIB_DIR "[YOUR SQL PATH]\mysql-connector-c-6.1.11-winx64\lib\vs14"
+* reboot your system
+* execute cargo clean
 * cargo install diesel_cli --no-default-features --features mysql
 * diesel setup --database-url "mysql://[MYSQL_USER]:[MYSQL_PASSWORD]@[MYSQL_HOST]:3306/[MYSQL_DATABASE]" (or use export DATABASE_URL environment variable)
 * diesel migration generate create_user (if you need to create a table, for this example, tables were already created)

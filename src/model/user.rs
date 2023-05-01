@@ -1,7 +1,7 @@
-use diesel::{Insertable, Queryable, AsChangeset};
-use serde::{Deserialize, Serialize};
-use schema::user;
 use chrono::NaiveDateTime;
+use diesel::{AsChangeset, Insertable, Queryable};
+use schema::user;
+use serde::{Deserialize, Serialize};
 
 use crate::schema;
 

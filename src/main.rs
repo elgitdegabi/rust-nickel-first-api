@@ -5,22 +5,23 @@ use nickel::Nickel;
 
 use config::constants::HOST;
 use config::database::*;
-use controller::controller::config_endpoints;
-use log::info;
+use controller::user_controller::config_endpoints;
 use dotenv::dotenv;
+use log::info;
 use std::env;
 
 mod config;
 mod controller;
 mod model;
-mod service;
 mod repository;
 mod schema;
+mod service;
 
 fn main() {
     dotenv().ok();
 
-    let log_config_file = env::var("LOG4RS_CONFIG_FILE").unwrap_or("logging_config.yaml".to_string());
+    let log_config_file =
+        env::var("LOG4RS_CONFIG_FILE").unwrap_or("logging_config.yaml".to_string());
     log4rs::init_file(log_config_file, Default::default()).unwrap();
 
     unsafe {
